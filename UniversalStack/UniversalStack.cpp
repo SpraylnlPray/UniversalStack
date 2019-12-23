@@ -5,8 +5,8 @@
 class someClass
 {
 public:
-    int test;
-    char test2;
+    int test = 1;
+    char test2 = 'a';
 };
 
 int main()
@@ -25,11 +25,10 @@ int main()
     float* popped2 = static_cast<float*>(stack.pop());
     int* popped3 = static_cast<int*>(stack.pop());
 
-    push = stack.push(1);
+    someClass test;
+    auto size = sizeof(test);
+    stack.push(test);
 
-     isEmpty = stack.isEmpty();
     std::string myString = "asdf";
     stack.push(myString); // crashes somehow
-
-    std::cout << "Hello World!\n";
 }

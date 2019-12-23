@@ -28,6 +28,7 @@ public:
 			*static_cast<T*>(top) = val; // write value into memory
 			top = static_cast<void*>(static_cast<char*>(top) + sizeof(val)); // increment pointer
 			sizes[count++] = sizeof(val); // save size and increment count
+
 			return true;
 		}
 
