@@ -10,7 +10,7 @@ class Stack
 public:
 	Stack() 
 	{
-		base = malloc(size); // allocating memory
+		base = calloc(size, 1); // allocating memory
 		top = base;
 		max = (void*)((char*)base + size);
 	}
@@ -25,9 +25,11 @@ public:
 	{
 		if (hasEnoughSpace(val))
 		{
+			memset(top, 0, sizeof(val)); // clean memory
 			*static_cast<T*>(top) = val; // write value into memory
 			top = static_cast<void*>(static_cast<char*>(top) + sizeof(val)); // increment pointer
-			sizes[count++] = sizeof(val); // save size and increment count
+			sizes[count] = sizeof(val); // save size
+			count++; // increment count
 
 			return true;
 		}
@@ -39,8 +41,9 @@ public:
 	{
 		if (!isEmpty())
 		{
-			top = static_cast<void*>(static_cast<char*>(top) - sizes[--count]); // decrement pointer and count
-			sizes[count] = 0;
+			count--; // decrement count
+			top = static_cast<void*>(static_cast<char*>(top) - sizes[count]); // decrement pointer
+			sizes[count] = 0; // set saved size for top to 0
 			return top;
 		}
 
@@ -65,7 +68,7 @@ private:
 	template<typename T>
 	bool hasEnoughSpace(T val) { return sizeof(val) <= getLeftSpace(); }
 
-	size_t sizes[size]; // in extreme case there are size elements with size of 1 byte
+	size_t sizes[size] = {}; // in extreme case there are size elements with a size of 1 byte
 	int count = 0;
 	void* top;
 	void* base;

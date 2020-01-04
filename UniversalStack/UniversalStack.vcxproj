@@ -148,7 +148,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Stack.cpp" />
     <ClCompile Include="UniversalStack.cpp" />
   </ItemGroup>
   <ItemGroup>

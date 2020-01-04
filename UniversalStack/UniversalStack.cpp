@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Stack.h"
 #include <string>
 
@@ -22,13 +21,13 @@ int main()
     bool peeked = stack.peek();
 
     bool popped = stack.pop();
-    float* popped2 = static_cast<float*>(stack.pop());
-    int* popped3 = static_cast<int*>(stack.pop());
+    float popped2 = *static_cast<float*>(stack.pop());
+    int popped3 = *static_cast<int*>(stack.pop());
 
     someClass test;
     auto size = sizeof(test);
     stack.push(test);
 
     std::string myString = "asdf";
-    stack.push(myString); // crashes somehow
+    stack.push(myString);
 }
